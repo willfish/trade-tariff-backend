@@ -54,6 +54,9 @@ module Api
     end
 
     def set_cache_headers
+      Rails.logger.info "IF NONE MATCH: #{request.if_none_match.inspect}"
+      Rails.logger.info "IF MODIFIED SINCE: #{request.if_modified_since.inspect}"
+
       if request.get? || request.head?
         set_cache_lifetime
         set_cache_etag

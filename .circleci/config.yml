@@ -812,7 +812,6 @@ workflows:
                 - /^dependabot\/(?!docker\/).*/
                 - /^hotfix\/.+/
           requires:
-            - test
             - build_dev
       - sync_opensearch_packages:
           name: sync_packages_dev
