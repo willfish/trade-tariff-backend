@@ -54,6 +54,12 @@ module Api
     end
 
     def set_cache_headers
+      request.headers.each do |k, v|
+        next if k.to_s.match?(/\./) || k.to_s.match?(/(warden|cookie)/i)
+
+        Rails.logger.info "#{k}: #{v}"
+      end
+
       Rails.logger.info "IF NONE MATCH: #{request.if_none_match.inspect}"
       Rails.logger.info "IF MODIFIED SINCE: #{request.if_modified_since.inspect}"
 
