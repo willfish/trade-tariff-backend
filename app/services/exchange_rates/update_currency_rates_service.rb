@@ -10,7 +10,7 @@ module ExchangeRates
 
       ExchangeRateCurrencyRate.db.transaction do
         rates = build_rates(response)
-        included_rates = ExchangeRateCurrency.select_map(:currency_code)
+        included_rates = ExchangeRateCountryHistory.active_currency_codes
         rates = rates.select { |rate| included_rates.include?(rate.currency_code) }
 
         upsert_rates(rates)
