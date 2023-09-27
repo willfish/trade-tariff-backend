@@ -92,7 +92,7 @@ RSpec.describe TariffSynchronizer, truncation: true do
 
   describe '.apply' do
     let(:applied_update) { create(:taric_update, :applied, example_date: Time.zone.yesterday) }
-    let(:pending_update) { create(:taric_update, :pending, example_date: Date.today) }
+    let(:pending_update) { create(:taric_update, :pending, example_date: Time.zone.today) }
 
     context 'when successful' do
       before do
@@ -263,7 +263,7 @@ RSpec.describe TariffSynchronizer, truncation: true do
 
   describe '.apply_cds' do
     let(:applied_update) { create(:cds_update, :applied, example_date: Time.zone.yesterday) }
-    let(:pending_update) { create(:cds_update, :pending, example_date: Date.today) }
+    let(:pending_update) { create(:cds_update, :pending, example_date: Time.zone.today) }
 
     before do
       allow_any_instance_of(CdsImporter).to receive(:import).and_return({})
@@ -281,9 +281,9 @@ RSpec.describe TariffSynchronizer, truncation: true do
     end
 
     context 'with failed updates present' do
-      before { create :taric_update, :failed }
-
       subject(:apply) { described_class.apply_cds }
+
+      before { create :taric_update, :failed }
 
       it 'does not kick off the ClearCacheWorker' do
         expect { apply }.to raise_error StandardError

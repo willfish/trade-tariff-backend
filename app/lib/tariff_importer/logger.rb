@@ -1,11 +1,11 @@
 module TariffImporter
   class Logger < ActiveSupport::LogSubscriber
     def taric_failed(event)
-      "Taric import failed: #{event.payload[:exception]}".tap { |message|
+      "Taric import failed: #{event.payload[:exception]}".tap do |message|
         message << "\n Failed transaction:\n #{event.payload[:hash]}"
         message << "\n Backtrace:\n #{event.payload[:exception].backtrace.join("\n")}"
         error message
-      }
+      end
     end
 
     def taric_imported(event)
@@ -17,11 +17,11 @@ module TariffImporter
     end
 
     def cds_failed(event)
-      "Cds import failed: #{event.payload[:exception]}".tap { |message|
+      "Cds import failed: #{event.payload[:exception]}".tap do |message|
         message << "\n Failed object: #{event.payload[:key]}\n #{event.payload[:hash]}"
         message << "\n Backtrace:\n #{event.payload[:exception].backtrace.join("\n")}"
         error message
-      }
+      end
     end
 
     def cds_imported(event)
