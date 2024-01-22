@@ -82,7 +82,11 @@ class TaricSynchronizer
         date = Date.parse(rollback_date.to_s)
 
         (date..Time.zone.today).to_a.reverse.each do |date_for_rollback|
+          Rails.logger.info "Rolling back for #{date_for_rollback}"
+
           Sequel::Model.db.transaction do
+            Rails.logger.info "** Oplog models are #{oplog_based_models.map(&:to_s).inspect} **"
+
             # Delete actual data
             oplog_based_models.each do |model|
               model.operation_klass.where(Sequel.lit('operation_date > ?', date_for_rollback)).delete
@@ -119,6 +123,8 @@ class TaricSynchronizer
             # removes data for subsequent days - so look for migrations after
             # the end of the date_for_rollback day
             DataMigration.since(date_for_rollback.end_of_day).delete
+
+            Rails.logger.info '**** End of transaction ****'
           end
         end
 
