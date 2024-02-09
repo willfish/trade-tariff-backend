@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.10 (Debian 13.10-1.pgdg110+1)
--- Dumped by pg_dump version 16.1
+-- Dumped from database version 13.13 (Debian 13.13-1.pgdg120+1)
+-- Dumped by pg_dump version 15.4 (Homebrew)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2006,18 +2006,6 @@ CREATE SEQUENCE uk.duty_expressions_oid_seq
 --
 
 ALTER SEQUENCE uk.duty_expressions_oid_seq OWNED BY uk.duty_expressions_oplog.oid;
-
-
---
--- Name: exchange_rate_countries; Type: TABLE; Schema: uk; Owner: -
---
-
-CREATE TABLE uk.exchange_rate_countries (
-    currency_code character varying(10),
-    country character varying(200),
-    country_code character varying(10) NOT NULL,
-    active boolean
-);
 
 
 --
@@ -8622,14 +8610,6 @@ ALTER TABLE ONLY uk.exchange_rate_countries_currencies
 
 
 --
--- Name: exchange_rate_countries exchange_rate_countries_pkey; Type: CONSTRAINT; Schema: uk; Owner: -
---
-
-ALTER TABLE ONLY uk.exchange_rate_countries
-    ADD CONSTRAINT exchange_rate_countries_pkey PRIMARY KEY (country_code);
-
-
---
 -- Name: exchange_rate_currencies exchange_rate_currencies_pkey; Type: CONSTRAINT; Schema: uk; Owner: -
 --
 
@@ -9976,13 +9956,6 @@ CREATE INDEX erno_exprefnomopl_ortundreslog_operation_date ON uk.export_refund_n
 
 
 --
--- Name: exchange_rate_countries_country_code_index; Type: INDEX; Schema: uk; Owner: -
---
-
-CREATE INDEX exchange_rate_countries_country_code_index ON uk.exchange_rate_countries USING btree (country_code);
-
-
---
 -- Name: exchange_rate_countries_currencies_currency_code_country_code_v; Type: INDEX; Schema: uk; Owner: -
 --
 
@@ -10008,13 +9981,6 @@ CREATE INDEX exchange_rate_countries_currencies_validity_end_date_index ON uk.ex
 --
 
 CREATE INDEX exchange_rate_countries_currencies_validity_start_date_index ON uk.exchange_rate_countries_currencies USING btree (validity_start_date);
-
-
---
--- Name: exchange_rate_countries_currency_code_index; Type: INDEX; Schema: uk; Owner: -
---
-
-CREATE INDEX exchange_rate_countries_currency_code_index ON uk.exchange_rate_countries USING btree (currency_code);
 
 
 --
@@ -12252,3 +12218,4 @@ INSERT INTO "schema_migrations" ("filename") VALUES ('20231003084051_adds_downlo
 INSERT INTO "schema_migrations" ("filename") VALUES ('20231205100020_adds_clear_cache_table.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20231213114821_read_only_user.rb');
 INSERT INTO "schema_migrations" ("filename") VALUES ('20240110120545_adds_user_privileges.rb');
+INSERT INTO "schema_migrations" ("filename") VALUES ('20240209121411_drop_exchange_rate_countries.rb');
