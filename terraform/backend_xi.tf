@@ -1,5 +1,5 @@
 module "backend_xi" {
-  source = "git@github.com:trade-tariff/trade-tariff-platform-terraform-modules.git//aws/ecs-service?ref=aws/ecs-service-v1.12.0"
+  source = "git@github.com:trade-tariff/trade-tariff-platform-terraform-modules.git//aws/ecs-service?ref=bau-ecs-service-deployment-check"
 
   service_name  = "backend-xi"
   service_count = var.service_count
