@@ -30,15 +30,21 @@ module Api
             ancestors.measures.measure_types
             ancestors.measures.footnotes
             ancestors.measures.additional_codes
+            ancestors.measures.measure_conditions
+            ancestors.measures.measure_conditions.certificates
             measures
             measures.measure_types
             measures.footnotes
             measures.additional_codes
+            measures.measure_conditions
+            measures.measure_conditions.certificates
             descendants
             descendants.measures
             descendants.measures.measure_types
             descendants.measures.footnotes
             descendants.measures.additional_codes
+            descendants.measures.measure_conditions
+            descendants.measures.measure_conditions.certificates
           ])
         end
       end

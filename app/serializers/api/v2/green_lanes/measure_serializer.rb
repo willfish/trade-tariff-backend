@@ -12,6 +12,7 @@ module Api
         has_one :measure_type, serializer: Measures::MeasureTypeSerializer
         has_one :additional_code, serializer: AdditionalCodeSerializer
         has_many :footnotes, serializer: Measures::FootnoteSerializer
+        has_many :measure_conditions, serializer: Measures::MeasureConditionSerializer
       end
     end
   end

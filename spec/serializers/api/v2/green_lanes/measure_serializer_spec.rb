@@ -7,7 +7,8 @@ RSpec.describe Api::V2::GreenLanes::MeasureSerializer do
     create :measure,
            :with_footnote_association,
            :with_goods_nomenclature,
-           :with_additional_code
+           :with_additional_code,
+           :with_measure_conditions
   end
 
   let :expected_pattern do
@@ -33,6 +34,14 @@ RSpec.describe Api::V2::GreenLanes::MeasureSerializer do
               id: measure.additional_code.additional_code_sid.to_s,
               type: 'additional_code',
             },
+          },
+          measure_conditions: {
+            data: [
+              {
+                id: measure.measure_conditions.first.measure_condition_sid.to_s,
+                type: 'measure_condition',
+              },
+            ],
           },
         },
       },

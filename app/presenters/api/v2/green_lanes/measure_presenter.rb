@@ -21,6 +21,10 @@ module Api
         def additional_code_id
           additional_code&.additional_code_sid
         end
+
+        def measure_condition_ids
+          measure_conditions.map(&:measure_condition_sid)
+        end
       end
     end
   end
